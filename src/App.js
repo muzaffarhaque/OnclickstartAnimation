@@ -1,23 +1,62 @@
 import logo from './logo.svg';
 import './App.css';
+import fontawesome from '@fortawesome/fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBell,faBook } from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react';
 
 function App() {
+let [start,setStart]=useState(false)
+  let data=[
+    {
+      icon:[
+        "book",
+        "bell",
+        "book",
+        "bell"
+      ]
+    }
+  ]
+  fontawesome.library.add(faBook,faBell);
+ function anmation(e){
+      setStart(e)
+     
+ }
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <div class="container">
+            <div class="icon-box">
+                <ul>
+                  {
+                    data && data.map(
+                      (e)=>{
+                        return(
+                          <>
+                          {
+                            e.icon.map(
+                              (item,i)=>{
+                                    return(
+                                      <li key={i} onClick={()=>anmation(i)} >
+                                      <FontAwesomeIcon id='icon' icon={item} />
+                                      {console.log(item)}
+                                      <span class={start===i?`border`:null} ></span>
+                                  </li>
+                                    )
+                              }
+                            )
+                          }
+                          </>
+                        
+                        )
+                      }
+                    )
+                  }
+                   
+                </ul>
+
+            </div>
+        </div>
     </div>
   );
 }
